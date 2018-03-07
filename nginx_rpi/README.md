@@ -1,16 +1,16 @@
 # NGINX Server Docker Image
 
-NGINX docker image made on top of the resin/rpi-raspbian:stretch image for RaspberryPi
+NGINX docker image made on top of the `resin/rpi-raspbian:stretch` image for RaspberryPi
 
 ## Running the container
 
-There is provided a .service file for use with systemd service.
+There is provided a `.service` file for use with systemd service.
 
 ## Let`s Enrypt
 
 This Docker image only contains the nginx server, and assumes that Let`s Encrypt TLS certificates 
 are created and handeled by a third party (like certbot), and that these are stored in the default 
-/etc/letsencrypt/ path on the native OS.
+`/etc/letsencrypt/` path on the native OS.
 
 ## DNS
 
