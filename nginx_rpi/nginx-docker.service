@@ -1,0 +1,18 @@
+[Unit]
+Description=Nginx Reverse Proxy
+Requires=docker.service
+After=docker.service
+
+[Service]
+Restart=always
+RestartSec=3
+ExecStart=/usr/bin/docker run \
+ --name="nginx-server" \
+ -v /etc/letsencrypt:/etc/letsencrypt:ro \
+ --net host \
+ --rm \
+ nginx-server-rpi:latest
+ExecStop=/usr/bin/docker stop -t 10 nginx-server
+
+[Install]
+WantedBy=multi-user.target
