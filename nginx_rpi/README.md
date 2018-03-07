@@ -8,7 +8,7 @@ There is provided a `.service` file for use with systemd service.
 
 ## Let`s Enrypt
 
-This Docker image only contains the nginx server, and assumes that Let`s Encrypt TLS certificates 
+This Docker image only contains the nginx server, and assumes that Lets Encrypt TLS certificates 
 are created and handeled by a third party (like certbot), and that these are stored in the default 
 `/etc/letsencrypt/` path on the native OS.
 
