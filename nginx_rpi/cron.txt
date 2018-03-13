@@ -1,0 +1,3 @@
+# HomeAssistant Domain DuckDns update
+*/5 * * * * ./resources/duck.sh >/dev/null 2>&1
+
