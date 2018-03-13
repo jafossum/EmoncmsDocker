@@ -8,14 +8,17 @@ RUN apt update \
 
 # forward request and error logs to docker log collector
 RUN ln -sf /dev/stdout /var/log/nginx/access.log \
-    && ln -sf /dev/stderr /var/log/nginx/error.log
+	&& ln -sf /dev/stderr /var/log/nginx/error.log
 
 ADD ./nginx_conf/homeassistant.conf /etc/nginx/sites-available/homeassistant.conf
 
 # Cron jobs
-ADD ./resources/cont.txt /etc/cron.d/nginx_cron
+ADD ./cron.txt /etc/cron.d/nginx_cron
+RUN chmod 644 /etc/cron.d/nginx_cron
 
-RUN chmod 0644 /etc/cron.d/nginx_cron
+# DuckDns Shell
+ADD ./resources/duck.sh /duckdns/duck.sh
+RUN chmod +x /duckdns/duck.sh
 
 # Disable default conf and add homeassistant.conf symlink
 RUN cd /etc/nginx/sites-enabled \
@@ -24,4 +27,4 @@ RUN cd /etc/nginx/sites-enabled \
 
 EXPOSE 80 443
 
-CMD ["nginx", "-g", "daemon off;"]
+CMD cron -f && nginx -g daemon off;
