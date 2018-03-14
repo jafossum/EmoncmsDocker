@@ -1,6 +1,6 @@
-# NGINX Server Docker Image
+# Cron Server Docker Image
 
-NGINX docker image made on top of the `resin/rpi-raspbian:stretch` image for RaspberryPi
+Cron docker image made on top of the `resin/rpi-raspbian:stretch` image for RaspberryPi
 
 ## Running the container
 
