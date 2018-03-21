@@ -15,16 +15,17 @@ Inside container run this command to test if certbot will work
 $ certbot renew --dry-run
 ```
 
+Or override the CMD by typing a new command when running the container 
+
+```sh
+$ docker run -v (your_cert_location):/etc/letsencrypt --net host --rm certbot-renew-rpi:latest certbot renew --dry-run
+```
+
 ### Generating certificates
 
 To generate certificates run this image with the following command:
 
 ```sh
-$ docker run -v (your_cert_location):/etc/letsencrypt --net host -it --rm certbot-renew-certbot:latest /bin/bash
+$ docker run -v (your_cert_location):/etc/letsencrypt --net host --rm certbot-renew-certbot:latest certbot certonly --standalone --preferred-challenges http-01 --email your@email.address -d example.com
 ```
 
-Inside the docker image run your cert generation command
-
-```sh
-$ certbot certonly --webroot -w /var/www/example -d example.com -d www.example.com
-```
