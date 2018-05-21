@@ -12,6 +12,4 @@ RUN gpg --keyserver pgpkeys.mit.edu --recv-key 7638D0442B90D010 \
 RUN apt update \
         && apt install -y certbot
 
-EXPOSE 80 443
-
 CMD ["certbot", "renew"]
