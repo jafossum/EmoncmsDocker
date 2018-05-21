@@ -13,6 +13,4 @@ RUN chmod 644 /etc/cron.d/nginx_cron
 COPY ./resources/duck.sh /duckdns/duck.sh
 RUN chmod +x /duckdns/duck.sh
 
-EXPOSE 80 443
-
 CMD ["cron", "-f"]
