@@ -1,0 +1,23 @@
+
+[Unit]
+Description=Home Assistant
+Requires=docker.service
+After=docker.service
+
+[Service]
+Restart=always
+RestartSec=3
+ExecStart=/usr/bin/docker run \
+ --name="home-assistant" \
+ --volume /home/pi/homeassistant_docker:/config \
+ --volume /etc/localtime:/etc/localtime:ro \
+ --volume /etc/letsencrypt:/etc/letsencrypt:ro \
+ --volume /usr/bin/ssl-cert-check:/usr/bin/ssl-cert-check:ro \
+ --device /dev/ttyACM0:/dev/ttyACM0 \
+ --network rpi-net \
+ --rm \
+ homeassistant/raspberrypi3-homeassistant:latest
+ExecStop=/usr/bin/docker stop -t 10 home-assistant
+
+[Install]
+WantedBy=multi-user.target
