@@ -1,4 +1,0 @@
-# HomeAssistant docker enviroment variables.
-
-DUCK_DOMAIN=example-domain
-DUCK_TOKEN=example-token
