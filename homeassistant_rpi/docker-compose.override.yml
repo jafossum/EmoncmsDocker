@@ -10,7 +10,3 @@ services:
   cron:
     env_file:
       - 'ha.docker-env'
-
-  ha:
-    env_file:
-      - 'ha.docker-env'
