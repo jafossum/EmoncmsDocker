@@ -1,10 +1,13 @@
 # Script for renewing LetsEncrypt certificates
 
+# CD to workdir of docker-compose
+cd $HOME/DockerImages/homeassistant_rpi
+
 # Stopping Nginx-server container
-sudo systemctl stop nginx-docker.service
+docker-compose stop nginx
 
 # Running certbot renew container
-docker run -v (your_cert_location):/etc/letsencrypt --network (docker-network) --rm certbot-renew-rpi:latest
+docker run -v (your_cert_location):/etc/letsencrypt --network host --rm certbot-renew-rpi
 
 # Starting Nginx-server container
-sudo systemctl start nginx-docker.service
+docker-compose start nginx
