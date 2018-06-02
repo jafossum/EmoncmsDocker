@@ -1,0 +1,42 @@
+# Base docker compose, added to by docker-compose.override or docker-compose.prod. See Readme.md
+
+version: '3'
+
+services:
+
+  # Nginx-Rpi image
+  nginx:
+    image: nginx-server-rpi
+    build: ./nginx_rpi/
+    volumes:
+      - /etc/letsencrypt:/etc/letsencrypt:ro
+    networks:
+      - rpi-net
+    restart: unless-stopped
+
+  # Cron running DuckDNS
+  cron:
+    image: cron-server-rpi
+    build: ./cron_rpi/
+    networks:
+      - rpi-net
+    restart: unless-stopped
+
+  ha:
+    # Home Assistant Image
+    image: homeassistant/raspberrypi3-homeassistant
+    volumes:
+      - /home/pi/homeassistant_docker:/config
+      - /etc/localtime:/etc/localtime:ro
+      - /etc/letsencrypt:/etc/letsencrypt:ro
+      - /usr/bin/ssl-cert-check:/usr/bin/ssl-cert-check:ro
+    devices:
+      - /dev/ttyACM0:/dev/ttyACM0
+    networks:
+      rpi-net:
+        aliases:
+          - home-assistant
+    restart: unless-stopped
+
+networks:
+  rpi-net:

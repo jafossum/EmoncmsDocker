@@ -1,0 +1,16 @@
+version: '3'
+
+services:
+
+  nginx:
+    ports:
+      - 80:80
+      - 443:443
+
+  cron:
+    env_file:
+      - 'ha.docker-env'
+
+  ha:
+    env_file:
+      - 'ha.docker-env'
