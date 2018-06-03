@@ -12,6 +12,6 @@ RUN chmod 644 /etc/cron.d/nginx_cron
 
 # DuckDns Shell
 COPY ./resources/secret /duckdns/duck.sh
-RUN chmod +x /duckdns/duck.sh
+RUN chmod 700 /duckdns/duck.sh
 
 CMD ["cron", "-f"]
