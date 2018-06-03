@@ -8,15 +8,15 @@ services:
     ports:
       - 80:80
       - 443:443
-  cron:
+  duckdns:
     env_file:
-      - 'emon.docker-env'
+      - './resources/emon.docker-env'
   web:
     env_file:
-      - 'emon.docker-env'
+      - './resources/emon.docker-env'
   db:
     env_file:
-      - 'emon.docker-env'
+      - './resources/emon.docker-env'
   redis:
     env_file:
-      - 'emon.docker-env'
+      - './resources/emon.docker-env'
