@@ -1,0 +1,22 @@
+# dev enviroment setup
+
+version: '3'
+
+services:
+
+  nginx:
+    ports:
+      - 80:80
+      - 443:443
+  duckdns:
+    env_file:
+      - './resources/emon.docker-env'
+  web:
+    env_file:
+      - './resources/emon.docker-env'
+  db:
+    env_file:
+      - './resources/emon.docker-env'
+  redis:
+    env_file:
+      - './resources/emon.docker-env'

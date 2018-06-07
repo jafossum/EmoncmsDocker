@@ -1,0 +1,70 @@
+# Base docker compose, added to by docker-compose.override or docker-compose.prod. See Readme.md
+
+version: '3'
+
+services:
+
+  # Nginx image
+  nginx:
+    image: nginx:stable-alpine
+    volumes:
+      - /etc/letsencrypt:/etc/letsencrypt:ro
+      - ./resources/secret.conf:/etc/nginx/conf.d/default.conf:ro
+    networks:
+      - emon-net
+    restart: unless-stopped
+
+  # DuckDNS image
+  duckdns:
+    image: linuxserver/duckdns
+    networks:
+      - emon-net
+    restart: unless-stopped
+
+  # PHP & apache container using offical Docker PHP iamge
+  web:
+    image: openenergymonitor/emoncms:latest
+    volumes:
+      # mount docker volumes persistant inside docker container
+      - emon-phpfiwa:/var/lib/phpfiwa
+      - emon-phpfina:/var/lib/phpfina
+      - emon-phptimeseries:/var/lib/phptimeseries
+    networks:
+      - emon-net
+    restart: unless-stopped
+
+  # MYSQL Database
+  db:
+    # Official MYSQL docker image
+    # To do: make compatiable with 5.7
+    image: mysql:5.6
+    volumes:
+      - emon-db-data:/var/lib/mysql
+    networks:
+      - emon-net
+    restart: unless-stopped
+  
+  # Redis Database
+  redis:
+    # Official redis image
+    image: redis:3.0.7
+    volumes:
+      - emon-redis-data:/data
+    networks:
+      - emon-net
+    restart: unless-stopped
+
+networks:
+  emon-net:
+
+volumes:
+  emon-phpfiwa:
+    driver: local
+  emon-phpfina:
+    driver: local
+  emon-phptimeseries:
+    driver: local
+  emon-db-data:
+    driver: local
+  emon-redis-data:
+    driver: local

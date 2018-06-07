@@ -1,3 +1,4 @@
 secret
+secret.conf
 env.list
 *.docker-env
