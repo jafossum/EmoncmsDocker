@@ -10,16 +10,14 @@ services:
     build: ./nginx_rpi/
     volumes:
       - /etc/letsencrypt:/etc/letsencrypt:ro
-    networks:
-      - rpi-net
+    network_mode: "host"
     restart: unless-stopped
 
   # Cron running DuckDNS
   cron:
     image: cron-server-rpi
     build: ./cron_rpi/
-    networks:
-      - rpi-net
+    network_mode: "host"
     restart: unless-stopped
 
   ha:
@@ -32,11 +30,5 @@ services:
       - /usr/bin/ssl-cert-check:/usr/bin/ssl-cert-check:ro
     devices:
       - /dev/ttyACM0:/dev/ttyACM0
-    networks:
-      rpi-net:
-        aliases:
-          - home-assistant
+    network_mode: "host"
     restart: unless-stopped
-
-networks:
-  rpi-net:
