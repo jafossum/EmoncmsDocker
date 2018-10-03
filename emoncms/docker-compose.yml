@@ -1,4 +1,4 @@
-# Base docker compose, added to by docker-compose.override or docker-compose.prod. See Readme.md
+# Base docker compose, added to by docker-compose.override
 
 version: '3'
 
@@ -11,14 +11,12 @@ services:
       - /etc/letsencrypt:/etc/letsencrypt:ro
       - ./resources/secret.conf:/etc/nginx/conf.d/default.conf:ro
     networks:
-      - emon-net
+      - emon-frontend
     restart: unless-stopped
 
   # DuckDNS image
   duckdns:
     image: linuxserver/duckdns
-    networks:
-      - emon-net
     restart: unless-stopped
 
   # PHP & apache container using offical Docker PHP iamge
@@ -31,6 +29,7 @@ services:
       - emon-phptimeseries:/var/lib/phptimeseries
     networks:
       - emon-net
+      - emon-frontend
     restart: unless-stopped
 
   # MYSQL Database
@@ -56,6 +55,7 @@ services:
 
 networks:
   emon-net:
+  emon-frontend
 
 volumes:
   emon-phpfiwa:
