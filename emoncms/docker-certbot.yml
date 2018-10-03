@@ -7,4 +7,5 @@ services:
     image: certbot/certbot
     volumes:
       - /etc/letsencrypt:/etc/letsencrypt
+    network_mode: "host"
 

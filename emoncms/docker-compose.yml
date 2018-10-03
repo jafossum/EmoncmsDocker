@@ -55,7 +55,7 @@ services:
 
 networks:
   emon-net:
-  emon-frontend
+  emon-frontend:
 
 volumes:
   emon-phpfiwa:
