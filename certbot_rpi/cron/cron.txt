@@ -1,3 +1,0 @@
-# Cron jobs for HA - Run as system user, not hass.
-
- 30 02 * * 1 /<path_to_script>/certbot_renew.sh
