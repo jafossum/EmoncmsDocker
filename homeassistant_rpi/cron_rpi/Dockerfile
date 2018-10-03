@@ -3,7 +3,8 @@ FROM resin/rpi-raspbian:stretch
 LABEL maintainer="John A. Fossum <jafossum@gmail.com>"
 
 RUN apt update \
-        && apt install -y cron
+        && apt install -y cron \
+        && rm -rf /var/lib/apt/lists/*
 
 # Cron jobs
 COPY ./resources/cron.txt /etc/cron.d/nginx_cron

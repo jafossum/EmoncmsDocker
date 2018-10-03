@@ -10,6 +10,7 @@ RUN gpg --keyserver pgpkeys.mit.edu --recv-key 7638D0442B90D010 \
         && gpg -a --export 7638D0442B90D010 | apt-key add - && echo OK
 
 RUN apt update \
-        && apt install -y certbot
+        && apt install -y certbot \
+        && rm -rf /var/lib/apt/lists/*
 
 CMD ["certbot", "renew"]
