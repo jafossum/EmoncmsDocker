@@ -1,0 +1,3 @@
+# Cron jobs for EMON - Run as system user.
+
+ 30 02 * * 1 /<path_to_script>/certbot_renew.sh
