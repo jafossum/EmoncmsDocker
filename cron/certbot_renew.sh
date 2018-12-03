@@ -7,7 +7,7 @@ cd $HOME/EmoncmsDocker
 docker-compose stop nginx
 
 # Running certbot renew container
-docker run -v (your_cert_location):/etc/letsencrypt --network host --rm certbot/certbot renew
+docker-compose -f docker-certbot.yml run --rm cert renew
 
 # Starting Nginx-server container
 docker-compose start nginx
